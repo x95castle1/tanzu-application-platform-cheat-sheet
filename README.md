@@ -8,7 +8,7 @@ VMWare provides a [troubleshooting guide](https://docs.vmware.com/en/Tanzu-Appli
 
 ### Installation and Package Management
 
-**Install or Update TAP:**
+***Install or Update TAP:***
 
 ```
 tanzu package install tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file tap-values.yml -n tap-install
@@ -18,28 +18,28 @@ tanzu package install tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file 
 tanzu package installed update tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file tap-values.yml -n tap-install
 ```
 
-**View installed packages by TAP on a Cluster:**
+***View installed packages by TAP on a Cluster:***
 
 ```
 tanzu package installed list -n tap-install
 ```
 
-**View possible configuration settings for a package (You can substitute any package name from the prior command):**
+***View possible configuration settings for a package (You can substitute any package name from the prior command):***
 
 ```
 tanzu package available get tap.tanzu.vmware.com/1.0.0 --values-schema --namespace tap-install
 ```
 
-**If package reconciliation fails (e.g. buildservice), look at installation status via:**
+***If package reconciliation fails (e.g. buildservice), look at installation status via:***
 
 ```
-k get packageinstall buildservice -n tap-install -o yaml
+kubectl get packageinstall buildservice -n tap-install -o yaml
 ```
 ```
-k get packageinstall buildservice -n tap-install -ojsonpath='{.status}'
+kubectl get packageinstall buildservice -n tap-install -ojsonpath='{.status}'
 ```
 
-**To understand the kubernetes resources brought by each tap package or troubleshoot package reconciliation, use the kapp cli ([install instructions](https://carvel.dev/kapp/docs/latest/install/))**
+***To understand the kubernetes resources brought by each tap package or troubleshoot package reconciliation, use the kapp cli ([install instructions](https://carvel.dev/kapp/docs/latest/install/))***
 
   * `kapp list -A` - list all packages 
   * `kapp inspect -a tap-ctrl -n tap-install` - inspect tap package
@@ -47,7 +47,7 @@ k get packageinstall buildservice -n tap-install -ojsonpath='{.status}'
   * `kapp inspect -a tekton-pipelines-ctrl -n tap-install` - inspect tekton package
 
   <details>
-    <summary>Sample kapp Inspect and Results<summary>
+    <summary>Sample kapp Inspect and Results</summary>
     
   ```
     ➜ kapp inspect -a tap-ctrl -n tap-install
@@ -154,11 +154,11 @@ If you exclude a package after performing a profile installation which included 
     ```
   </details>
 
-**Kapp Cheatsheet**
+***Kapp Cheatsheet***
   
 More kapp cli capabilities are outlined in this [cheat sheet](https://carvel.dev/kapp/docs/latest/cheatsheet/).
 
-**Delete a Package**
+***Delete a Package***
 
 ```
 tanzu package installed delete cloud-native-runtimes -n tap-install
@@ -166,7 +166,7 @@ tanzu package installed delete cloud-native-runtimes -n tap-install
 
 ### Package Repository Connectivity
 
-Failure in reconciling the Tanzu Application Platform package repository is often an authentication issue. Double check the tap-registry secret is properly set:
+***Failure in reconciling the Tanzu Application Platform package repository is often an authentication issue. Double check the tap-registry secret is properly set:
 
 ```
 kubectl get secret tap-registry --namespace tap-install -ojsonpath='{.data.\.dockerconfigjson}' | base64 -d

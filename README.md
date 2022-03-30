@@ -175,7 +175,9 @@ More kapp cli capabilities are outlined in this [cheat sheet](https://carvel.dev
 kubectl get secret tap-registry --namespace tap-install -ojsonpath='{.data.\.dockerconfigjson}' | base64 -d
 ```
 
-***tap-nudge function***
+***Force TAP to Reconcile***
+
+If you want to force TAP to reconcile you can use this function. It pauses the reconciliation and starts it again which will force TAP to reconcile. It's recommend to add this to your .bashrc or .zshrc files.
 
 ```
 function tap-nudge() {
@@ -185,4 +187,10 @@ function tap-nudge() {
         kubectl -n $TAPNS patch packageinstalls.packaging.carvel.dev $1 --type='json' -p '[{"op": "add",
 "path": "/spec/paused", "value":false}]}}' -v0
 }
+```
+
+Example of Usage:
+
+```
+tap-nudge tap
 ```

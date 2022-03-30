@@ -24,6 +24,12 @@ tanzu package installed update tap -p tap.tanzu.vmware.com -v $TAP_VERSION --val
 tanzu package installed list -n tap-install
 ```
 
+***Delete a TAP Package***
+
+```
+tanzu package installed delete cloud-native-runtimes -n tap-install
+```
+
 ***View possible configuration settings for a package (You can substitute any package name from the prior command):***
 
 ```
@@ -130,11 +136,12 @@ kubectl get packageinstall buildservice -n tap-install -ojsonpath='{.status}'
   ```
   </details>
 
-  
+***Check Reconciliation Status***
+
 If you exclude a package after performing a profile installation which included that package, the accurate package status will not reflect immediately through `tanzu package installed list -n tap-install`. kapp cli's app-change is a good way to get up-to-date reconciliation status, including timestamp. This can be done by issuing `kapp app-change list -a tap-ctrl -n tap-install` (where tap-ctrl is the kapp managed app name).
 
   <details>
-    <summary>sample run</summary>
+    <summary>Sample List of App Changes</summary>
     
     ```
   ➜ kapp app-change list -a tap-ctrl -n tap-install
@@ -157,12 +164,6 @@ If you exclude a package after performing a profile installation which included 
 ***Kapp Cheatsheet***
   
 More kapp cli capabilities are outlined in this [cheat sheet](https://carvel.dev/kapp/docs/latest/cheatsheet/).
-
-***Delete a Package***
-
-```
-tanzu package installed delete cloud-native-runtimes -n tap-install
-```
 
 ### Package Repository Connectivity
 

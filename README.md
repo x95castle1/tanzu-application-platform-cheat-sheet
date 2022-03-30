@@ -194,3 +194,7 @@ Example of Usage:
 ```
 tap-nudge tap
 ```
+
+## Inspect a Workload 
+
+---- ADD IN things like TAIL, Inspect a Workload, List

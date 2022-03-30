@@ -145,7 +145,7 @@ If you exclude a package after performing a profile installation which included 
   <details>
     <summary>Sample List of App Changes</summary>
     
-    ```
+  ```
   ➜ kapp app-change list -a tap-ctrl -n tap-install
   Target cluster 'https://10.213.79.10:6443' (nodes: unicorn-control-plane-wxhk5, 5+)
 
@@ -160,7 +160,7 @@ If you exclude a package after performing a profile installation which included 
   4 app changes
 
   Succeeded
-    ```
+  ```
   </details>
 
 ***Kapp Cheatsheet***
@@ -169,7 +169,7 @@ More kapp cli capabilities are outlined in this [cheat sheet](https://carvel.dev
 
 ### Package Repository Connectivity
 
-***Failure in reconciling the Tanzu Application Platform package repository is often an authentication issue. Double check the tap-registry secret is properly set:
+***Failure in reconciling the Tanzu Application Platform package repository is often an authentication issue. Double check the tap-registry secret is properly set:***
 
 ```
 kubectl get secret tap-registry --namespace tap-install -ojsonpath='{.data.\.dockerconfigjson}' | base64 -d

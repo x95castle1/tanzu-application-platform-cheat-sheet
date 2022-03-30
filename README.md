@@ -18,7 +18,7 @@ tanzu package install tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file 
 tanzu package installed update tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file tap-values.yml -n tap-install
 ```
 
-***View installed packages by TAP on a Cluster:***
+***View Installed Packages by TAP on a Cluster:***
 
 ```
 tanzu package installed list -n tap-install
@@ -30,13 +30,13 @@ tanzu package installed list -n tap-install
 tanzu package installed delete cloud-native-runtimes -n tap-install
 ```
 
-***View possible configuration settings for a package (You can substitute any package name from the prior command):***
+***View Possible Configuration Settings for a Package (You can substitute any package name from the prior command):***
 
 ```
 tanzu package available get tap.tanzu.vmware.com/1.0.0 --values-schema --namespace tap-install
 ```
 
-***If package reconciliation fails (e.g. buildservice), look at installation status via:***
+***Inspect Installation Status of a TAP Package (e.g. buildservice)***
 
 ```
 kubectl get packageinstall buildservice -n tap-install -o yaml
@@ -45,7 +45,9 @@ kubectl get packageinstall buildservice -n tap-install -o yaml
 kubectl get packageinstall buildservice -n tap-install -ojsonpath='{.status}'
 ```
 
-***To understand the kubernetes resources brought by each tap package or troubleshoot package reconciliation, use the kapp cli ([install instructions](https://carvel.dev/kapp/docs/latest/install/))***
+***Further Inspect Kubernetes Resources brought by each TAP Package or Troubleshoot Package Reconciliation:***
+
+Use the kapp cli ([install instructions](https://carvel.dev/kapp/docs/latest/install/))
 
   * `kapp list -A` - list all packages 
   * `kapp inspect -a tap-ctrl -n tap-install` - inspect tap package
@@ -136,7 +138,7 @@ kubectl get packageinstall buildservice -n tap-install -ojsonpath='{.status}'
   ```
   </details>
 
-***Check Reconciliation Status***
+***Inspect Reconciliation Status Using Kapp***
 
 If you exclude a package after performing a profile installation which included that package, the accurate package status will not reflect immediately through `tanzu package installed list -n tap-install`. kapp cli's app-change is a good way to get up-to-date reconciliation status, including timestamp. This can be done by issuing `kapp app-change list -a tap-ctrl -n tap-install` (where tap-ctrl is the kapp managed app name).
 

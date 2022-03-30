@@ -175,3 +175,12 @@ More kapp cli capabilities are outlined in this [cheat sheet](https://carvel.dev
 kubectl get secret tap-registry --namespace tap-install -ojsonpath='{.data.\.dockerconfigjson}' | base64 -d
 ```
 
+***tap-nudge function***
+
+function tap-nudge() {
+        TAPNS=tap-install
+        kubectl -n $TAPNS patch packageinstalls.packaging.carvel.dev $1 --type='json' -p '[{"op": "add",
+"path": "/spec/paused", "value":true}]}}' -v0
+        kubectl -n $TAPNS patch packageinstalls.packaging.carvel.dev $1 --type='json' -p '[{"op": "add",
+"path": "/spec/paused", "value":false}]}}' -v0
+}

@@ -177,6 +177,7 @@ kubectl get secret tap-registry --namespace tap-install -ojsonpath='{.data.\.doc
 
 ***tap-nudge function***
 
+```
 function tap-nudge() {
         TAPNS=tap-install
         kubectl -n $TAPNS patch packageinstalls.packaging.carvel.dev $1 --type='json' -p '[{"op": "add",
@@ -184,3 +185,4 @@ function tap-nudge() {
         kubectl -n $TAPNS patch packageinstalls.packaging.carvel.dev $1 --type='json' -p '[{"op": "add",
 "path": "/spec/paused", "value":false}]}}' -v0
 }
+```

@@ -195,6 +195,44 @@ Example of Usage:
 tap-nudge tap
 ```
 
-## Inspect a Workload 
+## Interacting with a Workload
 
----- ADD IN things like TAIL, Inspect a Workload, List
+The Tanzu CLI has many commands you can use to interact with the [Workload resource](https://docs.vmware.com/en/Tanzu-Application-Platform/1.0/tap/GUID-cli-plugins-apps-command-reference-tanzu_apps_workload.html). Here are some common commands that are useful:
+
+***Creating a Workload***
+
+```
+tanzu apps workload create tanzu-java-web-app \
+--git-repo https://github.com/sample-accelerators/tanzu-java-web-app \
+--git-branch main \
+--type web \
+--label app.kubernetes.io/part-of=tanzu-java-web-app \
+--yes
+```
+
+***Creating a Workload from a File***
+
+```
+tanzu apps workload create --file workload.yaml
+```
+
+***Deleting a Workload***
+
+```
+tanzu apps workload delete my-workload
+```
+
+***List all Workloads***
+
+```
+tanzu apps workload list
+tanzu apps workload list --all-namespaces
+```
+
+***Tail a Workload***
+
+You can stream logs for a workload until canceled. To cancel, press Ctl-c in the shell or kill the process. As new workload pods are started, the logs are displayed. To show historical logs use –since.
+
+```
+tanzu apps workload tail my-workload --since 1h
+```

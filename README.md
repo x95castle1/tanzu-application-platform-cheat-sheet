@@ -236,3 +236,11 @@ You can stream logs for a workload until canceled. To cancel, press Ctl-c in the
 ```
 tanzu apps workload tail my-workload --since 1h
 ```
+
+### Troubleshooting Builds
+
+https://github.com/vmware-tanzu/kpack-cli
+
+***Tails logs for an image build***
+
+kp build logs my-image -b 2 -n my-namespace

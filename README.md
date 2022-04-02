@@ -168,7 +168,7 @@ If you exclude a package after performing a profile installation which included 
 
 The values provided during TAP installation or update are set as a secret in the tap-install namespace. To get the tap values applied to a cluster run:
 ```
-kubectl get secret tap-tap-install-values -n tap-install -o jsonpath='{.data.{replace with key name (file name provided to tanzu package install)}}' | base64 -d
+kubectl get secret tap-tap-install-values -n tap-install -o jsonpath='{.data.[replace with file name provided to tanzu package install]}' | base64 -d
 ```
 
 > e.g. if file name is tap-values.yml - the command would be

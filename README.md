@@ -163,6 +163,20 @@ If you exclude a package after performing a profile installation which included 
   ```
   </details>
 
+
+***Get TAP values***
+
+The values provided during TAP installation or update are set as a secret in the tap-install namespace. To get the tap values applied to a cluster run:
+```
+kubectl get secret tap-tap-install-values -n tap-install -o jsonpath='{.data.{replace with key name (file name provided to tanzu package install)}}' | base64 -d
+```
+
+> e.g. if file name is tap-values.yml - the command would be
+
+```
+kubectl get secret tap-tap-install-values -n tap-install -o jsonpath='{.data.tap-values\.yml}' | base64 -d
+```
+
 ***Kapp Cheatsheet***
   
 More kapp cli capabilities are outlined in this [cheat sheet](https://carvel.dev/kapp/docs/latest/cheatsheet/).

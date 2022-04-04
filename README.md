@@ -258,3 +258,24 @@ https://github.com/vmware-tanzu/kpack-cli
 ***Tails logs for an image build***
 
 kp build logs my-image -b 2 -n my-namespace
+
+
+### Clean Up TAP
+
+***Delete the Tanzu CLI***
+
+This code below will do the follow: 
+1. Remove previously downloaded cli files
+2. Remove CLI binary (executable)
+3. Remove config directory
+4. Remove config directory
+5. remove cached catalog.yaml
+6. Remove plug-ins
+```
+rm -rf $HOME/tanzu/cli        
+sudo rm /usr/local/bin/tanzu  
+rm -rf ~/.config/tanzu/       
+rm -rf ~/.tanzu/              
+rm -rf ~/.cache/tanzu         
+rm -rf ~/Library/Application\ Support/tanzu-cli/* 
+```

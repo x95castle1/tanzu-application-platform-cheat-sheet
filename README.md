@@ -138,6 +138,9 @@ Use the kapp cli ([install instructions](https://carvel.dev/kapp/docs/latest/ins
   ```
   </details>
 
+
+* More kapp cli capabilities are outlined in this [cheat sheet](https://carvel.dev/kapp/docs/latest/cheatsheet/).
+
 ***Inspect Reconciliation Status Using Kapp***
 
 If you exclude a package after performing a profile installation which included that package, the accurate package status will not reflect immediately through `tanzu package installed list -n tap-install`. kapp cli's app-change is a good way to get up-to-date reconciliation status, including timestamp. This can be done by issuing `kapp app-change list -a tap-ctrl -n tap-install` (where tap-ctrl is the kapp managed app name).

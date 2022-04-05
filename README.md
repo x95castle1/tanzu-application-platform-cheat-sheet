@@ -279,3 +279,8 @@ rm -rf ~/.tanzu/
 rm -rf ~/.cache/tanzu         
 rm -rf ~/Library/Application\ Support/tanzu-cli/* 
 ```
+
+***Restart TAP GUI***
+```
+k deployment restart rollout server -n tap-gui
+```

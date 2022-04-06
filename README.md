@@ -352,7 +352,7 @@ tap-values.yaml
 
 **Example:** `index.docker.io/tapsme/inner-loop-demo-engineer1-bundle`
 
----
+
 ## Cloud Native Run Times URL
 
 TAP uses the cnrs.domain_name in tap-values.yaml along with the along with the workload name and namespace to construct the URL for applications deployed using Cloud Native Runtimes. 
@@ -370,7 +370,7 @@ cnrs:
 
 **Example:** `inner-loop-demo.engineer1.tapsme.org`
 
----
+
 ## Tilt Source Code
 
 Tilt create an image that contains the source code that is live loaded onto a cluster to allow VSCode to stream changes onto a live container. These images use the convention of -source on the image and are pushed into a repo. 

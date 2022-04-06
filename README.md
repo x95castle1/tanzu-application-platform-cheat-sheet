@@ -2,13 +2,13 @@
 
 This guide will walk you through different common commands to troubleshoot and interact with Tanzu Application Platform!
 
-## Helpful Installation Commands
+# Helpful Installation Commands
 
 VMWare provides a [troubleshooting guide](https://docs.vmware.com/en/Tanzu-Application-Platform/1.0/tap/GUID-troubleshooting-tap-troubleshoot-install-tap.html) for installation of TAP. This guide is a supplement and provides quick reference for common commands that can help you troubleshoot. 
 
-### Installation and Package Management
+# Installation and Package Management
 
-***Install or Update TAP:***
+## Install or Update TAP:
 
 ```
 tanzu package install tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file tap-values.yml -n tap-install
@@ -18,25 +18,25 @@ tanzu package install tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file 
 tanzu package installed update tap -p tap.tanzu.vmware.com -v $TAP_VERSION --values-file tap-values.yml -n tap-install
 ```
 
-***View Installed Packages by TAP on a Cluster:***
+## View Installed Packages by TAP on a Cluster:
 
 ```
 tanzu package installed list -n tap-install
 ```
 
-***Delete a TAP Package***
+## Delete a TAP Package***
 
 ```
 tanzu package installed delete cloud-native-runtimes -n tap-install
 ```
 
-***View Possible Configuration Settings for a Package (You can substitute any package name from the prior command):***
+## View Possible Configuration Settings for a Package (You can substitute any package name from the prior command):
 
 ```
 tanzu package available get tap.tanzu.vmware.com/1.0.0 --values-schema --namespace tap-install
 ```
 
-***Inspect Installation Status of a TAP Package (e.g. buildservice)***
+## Inspect Installation Status of a TAP Package (e.g. buildservice)
 
 ```
 kubectl get packageinstall buildservice -n tap-install -o yaml
@@ -45,7 +45,7 @@ kubectl get packageinstall buildservice -n tap-install -o yaml
 kubectl get packageinstall buildservice -n tap-install -ojsonpath='{.status}'
 ```
 
-***Further Inspect Kubernetes Resources brought by each TAP Package or Troubleshoot Package Reconciliation:***
+## Further Inspect Kubernetes Resources brought by each TAP Package or Troubleshoot Package Reconciliation:
 
 Use the kapp cli ([install instructions](https://carvel.dev/kapp/docs/latest/install/))
 
@@ -139,7 +139,7 @@ Use the kapp cli ([install instructions](https://carvel.dev/kapp/docs/latest/ins
   </details>
 
 
-***Inspect Reconciliation Status Using Kapp***
+## Inspect Reconciliation Status Using Kapp
 
 If you exclude a package after performing a profile installation which included that package, the accurate package status will not reflect immediately through `tanzu package installed list -n tap-install`. kapp cli's app-change is a good way to get up-to-date reconciliation status, including timestamp. This can be done by issuing `kapp app-change list -a tap-ctrl -n tap-install` (where tap-ctrl is the kapp managed app name).
 
@@ -164,7 +164,7 @@ If you exclude a package after performing a profile installation which included 
   ```
   </details>
 
-***Get TAP values***
+## Get TAP values
 
 The values provided during TAP installation or update are set as a secret in the tap-install namespace. To get the tap values applied to a cluster run:
 ```
@@ -177,19 +177,19 @@ kubectl get secret tap-tap-install-values -n tap-install -o jsonpath='{.data.[re
 kubectl get secret tap-tap-install-values -n tap-install -o jsonpath='{.data.tap-values\.yml}' | base64 -d
 ```
 
-***Kapp Cheatsheet***
+## Kapp Cheatsheet
   
 More kapp cli capabilities are outlined in this [cheat sheet](https://carvel.dev/kapp/docs/latest/cheatsheet/).
 
-### Package Repository Connectivity
+# Package Repository Connectivity
 
-***Failure in reconciling the Tanzu Application Platform package repository is often an authentication issue. Double check the tap-registry secret is properly set:***
+## Failure in reconciling the Tanzu Application Platform package repository is often an authentication issue. Double check the tap-registry secret is properly set:
 
 ```
 kubectl get secret tap-registry --namespace tap-install -ojsonpath='{.data.\.dockerconfigjson}' | base64 -d
 ```
 
-***Force TAP to Reconcile***
+## Force TAP to Reconcile
 
 If you want to force TAP to reconcile you can use this function. It pauses the reconciliation and starts it again which will force TAP to reconcile. It's recommend to add this to your .bashrc or .zshrc files.
 
@@ -209,11 +209,11 @@ Example of Usage:
 tap-nudge tap
 ```
 
-## Interacting with a Workload
+# Interacting with a Workload
 
 The Tanzu CLI has many commands you can use to interact with the [Workload resource](https://docs.vmware.com/en/Tanzu-Application-Platform/1.0/tap/GUID-cli-plugins-apps-command-reference-tanzu_apps_workload.html). Here are some common commands that are useful:
 
-***Creating a Workload***
+## Creating a Workload
 
 ```
 tanzu apps workload create tanzu-java-web-app \
@@ -224,7 +224,7 @@ tanzu apps workload create tanzu-java-web-app \
 --yes
 ```
 
-***Creating a Workload from a File***
+## Creating a Workload from a File
 
 ```
 tanzu apps workload create --file workload.yaml
@@ -236,14 +236,14 @@ tanzu apps workload create --file workload.yaml
 tanzu apps workload delete my-workload
 ```
 
-***List all Workloads***
+## List all Workloads
 
 ```
 tanzu apps workload list
 tanzu apps workload list --all-namespaces
 ```
 
-***Tail a Workload***
+## Tail a Workload
 
 You can stream logs for a workload until canceled. To cancel, press Ctl-c in the shell or kill the process. As new workload pods are started, the logs are displayed. To show historical logs use –since.
 
@@ -251,18 +251,18 @@ You can stream logs for a workload until canceled. To cancel, press Ctl-c in the
 tanzu apps workload tail my-workload --since 1h
 ```
 
-### Troubleshooting Builds
+# Troubleshooting Builds
 
 https://github.com/vmware-tanzu/kpack-cli
 
-***Tails logs for an image build***
+## Tails logs for an image build
 
 kp build logs my-image -b 2 -n my-namespace
 
 
-### Clean Up TAP
+# Clean Up TAP
 
-***Delete the Tanzu CLI***
+## Delete the Tanzu CLI
 
 This code below will do the follow: 
 1. Remove previously downloaded cli files
@@ -280,7 +280,7 @@ rm -rf ~/.cache/tanzu
 rm -rf ~/Library/Application\ Support/tanzu-cli/* 
 ```
 
-***Restart TAP GUI***
+## Restart TAP GUI
 ```
 k deployment restart rollout server -n tap-gui
 ```

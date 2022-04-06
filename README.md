@@ -348,13 +348,13 @@ tap-values.yaml
 
 **Example:** `index.docker.io/tapsme/inner-loop-demo-engineer1-bundle`
  
-***Application URLs
+***Application URLs***
  
 `http://<workload-name>.<namespace>.<INGRESS-DOMAIN>`
 
 **Example:** `inner-loop-demo.engineer1.tapsme.org`
  
-***Tilt Source Code
+***Tilt Source Code***
 
 Tilt create an image that contains the source code that is live loaded onto a cluster to allow VSCode to stream changes onto a live container. These images use the convention of -source on the image and are pushed into a repo. 
  

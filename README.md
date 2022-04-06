@@ -350,7 +350,7 @@ tap-values.yaml
  
 ***Application URLs
  
-http://<workload-name>.<namespace>.<INGRESS-DOMAIN>
+`http://<workload-name>.<namespace>.<INGRESS-DOMAIN>`
 
 **Example:** `inner-loop-demo.engineer1.tapsme.org`
  

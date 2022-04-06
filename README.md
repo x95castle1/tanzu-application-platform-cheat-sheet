@@ -24,7 +24,7 @@ tanzu package installed update tap -p tap.tanzu.vmware.com -v $TAP_VERSION --val
 tanzu package installed list -n tap-install
 ```
 
-## Delete a TAP Package***
+## Delete a TAP Package
 
 ```
 tanzu package installed delete cloud-native-runtimes -n tap-install
@@ -203,7 +203,7 @@ function tap-nudge() {
 }
 ```
 
-Example of Usage:
+**Example of Usage:**
 
 ```
 tap-nudge tap
@@ -230,7 +230,7 @@ tanzu apps workload create tanzu-java-web-app \
 tanzu apps workload create --file workload.yaml
 ```
 
-***Deleting a Workload***
+## Deleting a Workload
 
 ```
 tanzu apps workload delete my-workload

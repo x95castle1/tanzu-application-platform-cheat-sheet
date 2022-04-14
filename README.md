@@ -446,7 +446,7 @@ k logs learningcenter-portal-66bfdf97cf-5f9k5 -n learning-center-guided-ui
 This example uses the Workshop that is installed with TAP
 
 ```
-kubectlkubetcl get po -n learning-center-guided-w02 get po -n learning-center-guided-w02
+kubetcl get po -n learning-center-guided-w02 get po -n learning-center-guided-w02
 
 NAME                                                        READY   STATUS    RESTARTS   AGE
 learning-center-guided-w02-s006-766898bf46-w2xfr            2/2     Running   0          42s

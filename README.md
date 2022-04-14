@@ -183,7 +183,7 @@ More kapp cli capabilities are outlined in this [cheat sheet](https://carvel.dev
 
 ## Exclude Packages from TAP Installation
 
-You can exclude packages to be installed by TAP by using the `excluded_packages:` property in your tap-values.yaml. This is an example of only installing learning center for TAP:
+You can [exclude packages](https://docs.vmware.com/en/Tanzu-Application-Platform/1.0/tap/GUID-install.html#exclude-packages-from-a-tanzu-application-platform-profile-8) to be installed by TAP by using the `excluded_packages:` property in your tap-values.yaml. This is an example of only installing learning center for TAP:
 
 ```
 profile: view

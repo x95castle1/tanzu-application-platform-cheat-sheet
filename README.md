@@ -404,6 +404,21 @@ kubectl get trainingportal
 kubectl get workshops
 ```
 
+## Force Learning Center to Restart 
+Sometimes you want to force Learning Center to refresh configuration or pick up changes to workshops. You can delete the operator pod to force a refresh.
+
+```
+kubectl get po -n learningcenter
+
+NAME                                       READY   STATUS    RESTARTS   AGE
+learningcenter-operator-596f9d87b5-4lx9s   1/1     Running   0          28d
+learningcenter-prepull-8hlsd               1/1     Running   0          28d
+learningcenter-prepull-h8qfl               1/1     Running   0          28d
+learningcenter-prepull-ntkxz               1/1     Running   0          28d
+
+kubectl delete po learningcenter-operator-596f9d87b5-4lx9s -n learningcenter
+```
+
 ## Troubleshoot Learning Center
 
 ### Check the Learning Center Operator

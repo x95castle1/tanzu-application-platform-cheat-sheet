@@ -181,6 +181,34 @@ kubectl get secret tap-tap-install-values -n tap-install -o jsonpath='{.data.tap
   
 More kapp cli capabilities are outlined in this [cheat sheet](https://carvel.dev/kapp/docs/latest/cheatsheet/).
 
+## Exclude Packages from TAP Installation
+
+You can exclude packages to be installed by TAP by using the `excluded_packages:` property in your tap-values.yaml. This is an example of only installing learning center for TAP:
+
+```
+profile: view
+ceip_policy_disclosed: true # The value must be true for installation to succeed
+
+learningcenter:
+  ingressDomain: "tapsme.org"
+
+contour:
+  envoy:
+    service:
+      type: LoadBalancer
+
+excluded_packages:
+  - accelerator.apps.tanzu.vmware.com
+  - api-portal.tanzu.vmware.com
+  - backend.appliveview.tanzu.vmware.com
+  - buildservice.tanzu.vmware.com
+  - fluxcd.source.controller.tanzu.vmware.com
+  - metadata-store.apps.tanzu.vmware.com
+  - controller.source.apps.tanzu.vmware.com
+  - tap-gui.tanzu.vmware.com
+  - tap-auth.tanzu.vmware.com
+```
+
 # Package Repository Connectivity
 
 ## Failure in reconciling the Tanzu Application Platform package repository is often an authentication issue. Double check the tap-registry secret is properly set:
@@ -439,14 +467,14 @@ kubectl get po -n learning-center-guided-ui
 NAME                                     READY   STATUS    RESTARTS   AGE
 learningcenter-portal-66bfdf97cf-5f9k5   1/1     Running   0          34d
 
-k logs learningcenter-portal-66bfdf97cf-5f9k5 -n learning-center-guided-ui
+kubectl logs learningcenter-portal-66bfdf97cf-5f9k5 -n learning-center-guided-ui
 ```
 
 ### Check the Pods in the Workshop
 This example uses the Workshop that is installed with TAP
 
 ```
-kubetcl get po -n learning-center-guided-w02 get po -n learning-center-guided-w02
+kubectl get po -n learning-center-guided-w02 
 
 NAME                                                        READY   STATUS    RESTARTS   AGE
 learning-center-guided-w02-s006-766898bf46-w2xfr            2/2     Running   0          42s

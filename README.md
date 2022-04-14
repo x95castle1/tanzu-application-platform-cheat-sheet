@@ -389,3 +389,55 @@ tap-values.yaml
 **Convention of Artifact in Repo:** `<server>/<repository>/<Workload Name>-<namespace>-<source>`
 
 **Example:** `index.docker.io/tapsme/inner-loop-demo-engineer1-source`
+
+# Learning Center
+
+## Retrieve Installed Training Portals 
+
+```
+kubectl get trainingportal 
+```
+
+## Retrieve Intstalled Workshops
+
+```
+kubectl get workshops
+```
+
+## Troubleshoot Learning Center
+
+### Check the Learning Center Operator
+
+```
+kubectl get po -n learningcenter
+```
+```
+kubectl logs learningcenter-operator-<xxxxxxxxxx>-<xxxxx>
+```
+
+### Check the Pods in the Training Portal
+This example uses the Training Portal that is installed with TAP
+
+```
+kubectl get po -n learning-center-guided-ui
+
+NAME                                     READY   STATUS    RESTARTS   AGE
+learningcenter-portal-66bfdf97cf-5f9k5   1/1     Running   0          34d
+
+k logs learningcenter-portal-66bfdf97cf-5f9k5 -n learning-center-guided-ui
+```
+
+### Check the Pods in the Workshop
+This example uses the Workshop that is installed with TAP
+
+```
+kubectlkubetcl get po -n learning-center-guided-w02 get po -n learning-center-guided-w02
+
+NAME                                                        READY   STATUS    RESTARTS   AGE
+learning-center-guided-w02-s006-766898bf46-w2xfr            2/2     Running   0          42s
+learning-center-guided-w02-s006-registry-589bc4c6bd-9tb79   1/1     Running   0          42s
+
+
+kubectl logs learning-center-guided-w02-s006-766898bf46-w2xfr -n learning-center-guided-w02 -c workshop
+kubectl logs learning-center-guided-w02-s006-766898bf46-w2xfr -n learning-center-guided-w02 -c docker
+```

@@ -21,7 +21,7 @@ Steps to prove out TAP's image signing and verification capability:
     cosign.pub: xxxxxx
     kind: Secret
     metadata:
-    annotations:
+      annotations:
         kpack.io/cosign.docker-media-types: "1"
     name: cosign
     namespace: [workload namespace] 

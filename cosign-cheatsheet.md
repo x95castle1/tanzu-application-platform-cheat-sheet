@@ -8,7 +8,7 @@ Steps to prove out TAP's image signing and verification capability:
 
 3. Create a cosign secret
     ```
-    kubectl create secret -n [workload namespace] cosign --from-literal=cosign.password=[cosign secret passphrase] --from-file=[path to cosign.key output of step 2] --from-file=[path to cosign.pub output of step 2]
+    kubectl -n [workload namespace] create secret genericcosign --from-literal=cosign.password=[cosign secret passphrase] --from-file=[path to cosign.key output of step 2] --from-file=[path to cosign.pub output of step 2]
     ```
 
     > Note: If you are using dockerhub or a registry that does not support OCI media types, you need to add the annotation kpack.io/cosign.docker-media-types: "1" to the cosign secret. Additional information [here](https://docs.vmware.com/en/Tanzu-Build-Service/1.3/vmware-tanzu-build-service-v13/GUID-managing-images.html#image-signing-with-cosign).

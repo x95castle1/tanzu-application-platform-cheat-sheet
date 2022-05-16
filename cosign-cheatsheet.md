@@ -108,14 +108,14 @@ Steps to prove out TAP's image signing and verification capability:
             - vmware-sources
         keys:
         - name: cosign-key
-        publicKey: |
+          publicKey: |
             -----BEGIN PUBLIC KEY-----
             [add cosign.pub content]
             -----END PUBLIC KEY-----
         images:
         - namePattern: [registry path used by supply chain]/*
-        keys:
-        - name: cosign-key
+          keys:
+          - name: cosign-key
     EOF
     ```
 

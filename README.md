@@ -50,15 +50,15 @@ kubectl get packageinstall buildservice -n tap-install -ojsonpath='{.status}'
 Use the kapp cli ([install instructions](https://carvel.dev/kapp/docs/latest/install/))
 
   * `kapp list -A` - list all packages 
-  * `kapp inspect -a tap-ctrl -n tap-install` - inspect tap package
-  * `kapp inspect -a tap-gui-ctrl -n tap-install` - inspect tap-gui package
-  * `kapp inspect -a tekton-pipelines-ctrl -n tap-install` - inspect tekton package
+  * `kapp inspect -a tap-ctrl.app -n tap-install` - inspect tap package
+  * `kapp inspect -a tap-gui-ctrl.app -n tap-install` - inspect tap-gui package
+  * `kapp inspect -a tekton-pipelines-ctrl.app -n tap-install` - inspect tekton package
 
   <details>
     <summary>Sample kapp Inspect and Results</summary>
     
   ```
-    ➜ kapp inspect -a tap-ctrl -n tap-install
+    ➜ kapp inspect -a tap-ctrl.app -n tap-install --tree
     Target cluster 'https://10.213.79.10:6443' (nodes: unicorn-control-plane-wxhk5, 5+)
 
     07:56:06AM: info: Resources: Ignoring group version: schema.GroupVersionResource{Group:"stats.antrea.tanzu.vmware.com", Version:"v1alpha1", Resource:"networkpolicystats"}: feature NetworkPolicyStats disabled
@@ -141,13 +141,13 @@ Use the kapp cli ([install instructions](https://carvel.dev/kapp/docs/latest/ins
 
 ## Inspect Reconciliation Status Using Kapp
 
-If you exclude a package after performing a profile installation which included that package, the accurate package status will not reflect immediately through `tanzu package installed list -n tap-install`. kapp cli's app-change is a good way to get up-to-date reconciliation status, including timestamp. This can be done by issuing `kapp app-change list -a tap-ctrl -n tap-install` (where tap-ctrl is the kapp managed app name).
+If you exclude a package after performing a profile installation which included that package, the accurate package status will not reflect immediately through `tanzu package installed list -n tap-install`. kapp cli's app-change is a good way to get up-to-date reconciliation status, including timestamp. This can be done by issuing `kapp app-change list -a tap-ctrl.app -n tap-install` (where tap-ctrl is the kapp managed app name).
 
   <details>
     <summary>Sample List of App Changes</summary>
     
   ```
-  ➜ kapp app-change list -a tap-ctrl -n tap-install
+  ➜ kapp app-change list -a tap-ctrl.app -n tap-install
   Target cluster 'https://10.213.79.10:6443' (nodes: unicorn-control-plane-wxhk5, 5+)
 
   App changes
@@ -219,6 +219,7 @@ kubectl get secret tap-registry --namespace tap-install -ojsonpath='{.data.\.doc
 
 ## Force TAP to Reconcile
 
+### via shell script function
 If you want to force TAP to reconcile you can use this function. It pauses the reconciliation and starts it again which will force TAP to reconcile. It's recommend to add this to your .bashrc or .zshrc files.
 
 ```
@@ -236,6 +237,21 @@ function tap-nudge() {
 ```
 tap-nudge tap
 ```
+
+### via kctrl cli
+Carvel provides a kapp-controller CLI, aka kctrl which can be used to force reconciliation of a carvel package, e.g. TAP. To install kctrl, follow these [intructions](https://carvel.dev/kapp-controller/docs/v0.35.0/install/#installing-kapp-controller-cli-kctrl).
+
+```
+kctrl package installed kick -i tap -n tap-install
+```
+
+The individual TAP packages, brought in by the TAP meta package can also be reconciled instantly. For example, to force reconciliation of tap-gui
+```
+kctrl package installed kick -i tap-gui -n tap-install
+
+```
+
+
 
 # Interacting with a Workload
 
